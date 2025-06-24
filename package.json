@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@chakra-ui/react": "^3.21.0",
     "axios": "^1.10.0",
     "bcryptjs": "^3.0.2",
     "jsonwebtoken": "^9.0.2",

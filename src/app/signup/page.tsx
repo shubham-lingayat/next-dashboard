@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {axios} from "axios";
-import { Button } from "@chakra-ui/react"
 
 const SignupPage = () =>{
 
@@ -23,7 +22,7 @@ const SignupPage = () =>{
                     <input id="email_add" className="px-3 py-2 rounded-sm" placeholder="Email Address" type="email" value={user.email} onChange={(event)=> setUser({...user, email:event.target.value})} />
                     <label htmlFor="password">Password: </label>
                     <input id="password" className="px-3 py-2 rounded-sm" placeholder="Password" type="password" value={user.password} onChange={(event)=> setUser({...user, password:event.target.value})} />
-                    <Button type="submit">Button</Button>
+                    <button type="submit">Submit</button>
                 </form>
                 <Link href="/login">Vist Login Page</Link>
             </div>
