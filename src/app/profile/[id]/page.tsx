@@ -1,4 +1,5 @@
-const UserProfilePage = ({params}:any) => {
+const UserProfilePage = ({params}: { params: { id: string } }) => {
+    // const { id } = await params;
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <h1>Profile</h1>

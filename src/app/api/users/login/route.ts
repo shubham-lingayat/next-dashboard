@@ -2,6 +2,7 @@ import { connect } from "@/dbConfig/dbConfig";
 import User from "@/models/userModel";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
 connect();
 
@@ -17,7 +18,7 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-    // we have to hash the password to match
+    // match the password
     const isPasswordMatch = await bcrypt.compare(
       password,
       userDetails.password
@@ -30,10 +31,25 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json(
-      { success: true, message: "Login Success" },
-      { status: 200 }
-    );
+    //create token data
+        const tokenData = {
+            id: userDetails._id,
+            username: userDetails.username,
+            email: userDetails.email
+        }
+        //create token
+        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {expiresIn: "1d"})
+
+        const response = NextResponse.json({
+            message: "Login successful",
+            success: true,
+        })
+        response.cookies.set("token", token, {
+            httpOnly: true, 
+            
+        })
+        return response;
+
   } catch (err: unknown) {
     console.error("Error in Post Handler:", err);
 
